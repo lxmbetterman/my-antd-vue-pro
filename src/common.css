@@ -1,0 +1,13 @@
+body{
+  overflow: hidden;
+}
+/* menu菜单选中高亮时的颜色 */
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: #0c4a83;
+}
+.unableSelect {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
