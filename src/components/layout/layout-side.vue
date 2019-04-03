@@ -13,7 +13,7 @@
       </div> -->
       <div class="outer-container">
         <div class="inner-container">
-          <i-menu :menu='$store.getters.routers' :collapsed='collapsed'></i-menu>
+          <i-menu :menu='$store.getters.routers' :collapsed='collapsed' :singleExpand='false'></i-menu>
         </div>
       </div>
     </a-layout-sider>
@@ -48,16 +48,17 @@ export default {
 </script>
 <style lang='scss' scoped>
 .logo{
-  height:56px;
+  height:64px;
   padding-left: 24px;
   padding-top: 16px;
   cursor: pointer;
   overflow: hidden;
   img{
-    height: 35px;
+    height: 36px;
     display: inline-block;
     vertical-align: top;
-    line-height: 35px;
+    line-height: 37px;
+    margin-bottom: 5px;
   }
   h1{
     font-weight: 600;
@@ -69,8 +70,8 @@ export default {
     display: inline-block;
     padding-left: 8px;
     vertical-align: top;
-    line-height: 35px;
-    -webkit-transition: all .25s;
+    line-height: 37px;
+    -webkit-transition: all .5s;
     transition: all .25s;
     &.showProName{
       font-size: 10px;
@@ -82,7 +83,8 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 118px);
+  background-color: #001529;
 }
 .inner-container {
   position: absolute;

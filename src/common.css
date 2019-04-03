@@ -5,6 +5,12 @@ body{
 .ant-menu.ant-menu-dark .ant-menu-item-selected {
   background-color: #0c4a83;
 }
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+  background-color: #0c4a83;
+}
+.ant-layout-footer{
+  padding: 13.5px 50px;
+}
 .unableSelect {
   -webkit-user-select:none;
   -moz-user-select:none;

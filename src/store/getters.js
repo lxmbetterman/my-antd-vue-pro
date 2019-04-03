@@ -10,6 +10,7 @@ const getters = {
   routers: state => state.permission.routers, // 所有的路由数据
 
   // modules/layout
-  collapsed: state => state.layout.collapsed
+  collapsed: state => state.layout.collapsed,
+  menuPosition: state => state.layout.menuPosition
 }
 export default getters

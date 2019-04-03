@@ -1,11 +1,12 @@
 import Vue from 'vue'
+import 'babel-polyfill'
 import App from './views/App'
 import router from './router/router'
 import store from './store/index'
 import {
   Button,
   Layout,
-  Menu, Icon
+  Menu, Icon, Row, Col, Drawer, BackTop, Tabs
 } from 'ant-design-vue'
 import './permission'
 import Storage from 'vue-ls'
@@ -17,6 +18,12 @@ Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Icon)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Drawer)
+Vue.use(BackTop)
+Vue.use(Tabs)
+
 Vue.use(Storage, {
   namespace: 'pro__', // key prefix
   name: 'ls', // name variable Vue.[ls] or this.[$ls],
@@ -28,5 +35,9 @@ Vue.config.productionTip = false
 new Vue({
   router: router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  mounted () {
+    store.commit('SAVE_APP_TOKEN', Vue.ls.get('token')) // 每次刷新把localStorage的token保存一份到store
+  }
 }).$mount('#app')
+Vue.ls.get('token')

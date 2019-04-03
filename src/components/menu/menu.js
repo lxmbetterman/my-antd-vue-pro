@@ -22,8 +22,13 @@ export default {
     },
     collapsed: {
       type: Boolean,
-      required: true,
+      required: false,
       default: false
+    },
+    singleExpand: {
+      type: Boolean,
+      required: false,
+      default: true // 默认情况下只能展开一个
     }
   },
   data () {
@@ -119,21 +124,31 @@ export default {
       return menuArr
     },
     onOpenChange (openKeys) {
-      const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
-      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) { //
+      if (this.mode === 'horizontal') { // 要处理一下horizontal
         this.openKeys = openKeys
+        return
+      }
+      if (this.$props.singleExpand) { // 只能展开一个
+        const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
+        if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) { //
+          this.openKeys = openKeys
+        } else {
+          this.openKeys = latestOpenKey ? [latestOpenKey] : []
+        }
       } else {
-        this.openKeys = latestOpenKey ? [latestOpenKey] : []
+        this.openKeys = openKeys
       }
     },
     updateMenu () {
       let routes = this.$route.matched.concat()
       this.selectedKeys = [routes.pop().path]
-      let openKeys = []
-      routes.forEach((item) => {
-        openKeys.push(item.path)
-      })
-      this.collapsed ? this.cachedOpenKeys = openKeys : this.openKeys = openKeys
+      if (this.$props.singleExpand) {
+        let openKeys = []
+        routes.forEach((item) => {
+          openKeys.push(item.path)
+        })
+        this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.openKeys = openKeys
+      }
     }
   },
   render (h) {
@@ -143,7 +158,7 @@ export default {
         props: {
           theme: this.$props.theme,
           mode: this.$props.mode,
-          inlineCollapsed: true,
+          // inlineCollapsed: true,
           openKeys: this.openKeys,
           selectedKeys: this.selectedKeys
         },

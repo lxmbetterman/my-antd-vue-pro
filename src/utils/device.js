@@ -4,7 +4,7 @@ const enquireScreen = function (call) { // 在屏幕零界点触发
   // tablet
   const handler = {
     match: function () {
-      call && call(0) // screen 小于 max 980.00px 返回 0
+      call && call(0) // screen 小于 max 980.00px && 767.99px大于返回 0
     },
     unmatch: function () {
       call && call(-1) // screen 大于 max 980.00px 返回 -1
@@ -16,7 +16,7 @@ const enquireScreen = function (call) { // 在屏幕零界点触发
       call && call(1) // 小于767.99时 返回 1
     }
   }
-  enquireJs.register('screen and (max-width: 980.99px)', handler)
+  enquireJs.register('screen and (max-width: 1335.99px)', handler)
   enquireJs.register('screen and (max-width: 767.99px)', handler2)
 }
 

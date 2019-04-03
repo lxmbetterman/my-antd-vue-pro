@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <h1>This is an home page {{$store.getters.roles}}</h1>
+    <span>
+      This is an home page {{$store.getters.roles}}
+      </span>
+      <br>
     <a-button type="primary" @click="$router.push('/test1')">test1-1</a-button>
     <a-button  @click="$router.push('/test2')">Default</a-button>
     <a-button type="dashed">Dashed</a-button>
@@ -14,3 +17,9 @@ export default {
   name: 'home'
 }
 </script>
+<style lang="scss" scoped>
+ .home {
+   background-color: #fff;
+   //  min-height: calc(100vh - 162px);
+ }
+</style>
