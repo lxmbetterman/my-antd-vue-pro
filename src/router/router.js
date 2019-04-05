@@ -93,6 +93,27 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/editor',
+    component: Layout,
+    name: 'editor',
+    redirect: '/editor/markdown',
+    meta: {
+      title: '编辑器',
+      icon: 'question',
+      roles: []
+    },
+    children: [{
+      path: '/editor/markdown',
+      component: () => import('../views/editor/markdown.vue'),
+      name: 'markdown',
+      meta: {
+        title: 'mardown编辑器',
+        icon: 'question',
+        roles: ['admin']
+      } // 'admin',
+    }]
+  },
+  {
     path: '*',
     redirect: '/404',
     hidden: true

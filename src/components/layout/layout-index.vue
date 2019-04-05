@@ -12,18 +12,7 @@
       <a-layout>
         <lay-header></lay-header>
         <a-layout-content>
-          <div class='tab-container unableSelect'>
-              <a-tabs @change="callback" type="card">
-                <a-tab-pane tab="Tab 11111" key="1"></a-tab-pane>
-                <a-tab-pane tab="Tab 22222" key="2"></a-tab-pane>
-                <a-tab-pane tab="Tab 33333" key="3"></a-tab-pane>
-                <a-tab-pane tab="Tab 44444" key="4"></a-tab-pane>
-                <a-tab-pane tab="Tab 55555" key="5"></a-tab-pane>
-                <a-tab-pane tab="Tab 66666" key="6"></a-tab-pane>
-                <a-tab-pane tab="Tab 77777" key="7"></a-tab-pane>
-                <a-tab-pane tab="Tab 88888" key="8"></a-tab-pane>
-              </a-tabs>
-          </div>
+          <tab-item></tab-item>
           <div class='main-view' @scroll="testScroll">
             <router-view class='main-view-root'></router-view>
           </div>
@@ -38,10 +27,11 @@
 <script>
 import LaySide from './layout-side'
 import LayHeader from './layout-header'
-import Drawer from '../tools/Drawer'
+import TabItem from './tab-item'
+// import Drawer from '../tools/Drawer'
 
 export default {
-  components: { LaySide, LayHeader, Drawer },
+  components: { LaySide, LayHeader, TabItem },
   data () {
     return {
       showSetting: false,
@@ -87,15 +77,6 @@ export default {
     height: 30px;
     opacity: .8;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .tab-container{
-    height: auto;
-    // background-color: #f1f1f1;
-    overflow: hidden;
-    padding: 0 50px;
-    padding-left: 30px;
-    overflow: hidden;
   }
 
   .main-view{

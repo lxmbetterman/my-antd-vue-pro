@@ -6,7 +6,7 @@ import store from './store/index'
 import {
   Button,
   Layout,
-  Menu, Icon, Row, Col, Drawer, BackTop, Tabs
+  Menu, Icon, Row, Col, Drawer, BackTop, Tabs, Dropdown, Avatar
 } from 'ant-design-vue'
 import './permission'
 import Storage from 'vue-ls'
@@ -14,6 +14,11 @@ import { VueAxios } from './axios/request' // 整体使用就行
 import './mock' // 引入mockjs
 import './common.css'
 import 'normalize.css'
+
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+Vue.use(mavonEditor)
+
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Menu)
@@ -23,6 +28,8 @@ Vue.use(Col)
 Vue.use(Drawer)
 Vue.use(BackTop)
 Vue.use(Tabs)
+Vue.use(Dropdown)
+Vue.use(Avatar)
 
 Vue.use(Storage, {
   namespace: 'pro__', // key prefix

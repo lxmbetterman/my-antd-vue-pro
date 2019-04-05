@@ -18,7 +18,7 @@
           <a-button style='display:inline-block' @click="test"> 布局 </a-button>
           <a-button style='display:inline-block' @click="toggleMenu">.</a-button>
           <span style='color:red'>{{$store.getters.token}}??</span> -->
-
+          <header-avatar></header-avatar>
         </a-col>
       </a-row>
     </div>
@@ -27,8 +27,9 @@
 
 <script>
 import IMenu from '../menu/menu.js'
+import HeaderAvatar from './header-avatar.vue'
 export default {
-  components: { IMenu },
+  components: { IMenu, HeaderAvatar },
   data () {
     return {}
   },
@@ -59,6 +60,7 @@ export default {
 <style lang='scss' scoped>
 .ant-layout-header{  // 重置layout-header 的默认左右padding
   padding: 0;
+  color:#777
 }
 .side-header-content{
   max-width: 1500px;
@@ -110,5 +112,6 @@ export default {
 }
 .header-col-options{
   width:320px;
+  text-align: center;
 }
 </style>
