@@ -1,8 +1,8 @@
 <!--  -->
 <template>
   <div>
-    <mavon-editor ref='md' @htmlCode='test2' v-model="value" @change='test3'/>
-    <a-button @click="test">aaa</a-button>
+    <!-- <mavon-editor ref='md' @htmlCode='test2' v-model="value" @change='test3'/> -->
+    <a-button >aaa</a-button>
   </div>
 </template>
 
@@ -14,18 +14,8 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$refs)
   },
   methods: {
-    test () {
-      console.log(this.$refs.md)
-    },
-    test2 (a, b) {
-      console.log(a, b)
-    },
-    test3 (a, b) {
-      console.log(a, b)
-    }
   }
 }
 

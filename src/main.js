@@ -15,10 +15,6 @@ import './mock' // 引入mockjs
 import './common.css'
 import 'normalize.css'
 
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
-Vue.use(mavonEditor)
-
 Vue.use(Button)
 Vue.use(Layout)
 Vue.use(Menu)
