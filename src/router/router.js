@@ -111,6 +111,36 @@ export const asyncRouterMap = [
         icon: 'question',
         roles: ['admin']
       } // 'admin',
+    }, {
+      path: '/editor/tinymce',
+      component: () => import('../views/editor/tinymcePage.vue'),
+      name: 'tinymce',
+      meta: {
+        title: '富文本编辑器',
+        icon: 'question',
+        roles: ['admin']
+      } // 'admin',
+    }]
+  },
+  {
+    path: '/form',
+    component: Layout,
+    name: 'form',
+    redirect: '/form/basic_form',
+    meta: {
+      title: '表单集合',
+      icon: 'question',
+      roles: []
+    },
+    children: [{
+      path: '/form/basic_form',
+      component: () => import('../views/form/basic_form.vue'),
+      name: 'basic_form',
+      meta: {
+        title: '基础表单的实现',
+        icon: 'question',
+        roles: ['admin']
+      } // 'admin',
     }]
   },
   {

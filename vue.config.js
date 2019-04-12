@@ -34,9 +34,21 @@ module.exports = {
         javascriptEnabled: true
       }
     }
-  },
-  devServer: {
-    port: 9000,
-    host: '0.0.0.0'
   }
+  // devServer: {
+  //   port: 9000,
+  //   host: '0.0.0.0',
+  //   baseUrl: '/'
+  //   // proxy: {
+  //   //   '/': {
+  //   //     target: 'https://gtxof9ehb8.execute-api.cn-north-1.amazonaws.com.cn',
+  //   //     changeOrigin: true,
+  //   //     pathRewrite: {
+  //   //       '^/': ''
+  //   //     }
+  //   //   }
+  //   // }
+  //   // https://gtxof9ehb8.execute-api.cn-north-1.amazonaws.com.cn/dev/meta?type=1
+  //   // https://gtxof9ehb8.execute-api.cn-north-1.amazonaws.com.cn
+  // }
 }
