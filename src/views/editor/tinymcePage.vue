@@ -1,10 +1,15 @@
 <!--  -->
 <template>
-  <div>tinymce</div>
+  <div>
+    tinymce
+    <tinymce/>
+  </div>
 </template>
 
 <script>
+import Tinymce from '@/components/Tinymce/index.vue'
 export default {
+  components: { Tinymce },
   data () {
     return {
     }

@@ -17,7 +17,7 @@ module.exports = {
   productionSourceMap: false, // js map文件
   chainWebpack: (config) => {
     config.resolve.alias
-      .set('@$', resolve('src'))
+      .set('@', resolve('src'))
       .set('@api', resolve('src/api'))
   },
   configureWebpack: {},

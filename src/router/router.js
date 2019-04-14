@@ -141,6 +141,15 @@ export const asyncRouterMap = [
         icon: 'question',
         roles: ['admin']
       } // 'admin',
+    }, {
+      path: '/form/basic_form2',
+      component: () => import('../views/form/form2.vue'),
+      name: 'basic_form2',
+      meta: {
+        title: '基础表单的实现2',
+        icon: 'question',
+        roles: ['admin']
+      } // 'admin',
     }]
   },
   {

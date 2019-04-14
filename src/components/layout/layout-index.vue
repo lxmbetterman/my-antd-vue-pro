@@ -13,7 +13,8 @@
         <lay-header></lay-header>
         <a-layout-content>
           <tab-item></tab-item>
-          <div class='main-view' @scroll="testScroll">
+          <div class='main-view' >
+            <!-- @scroll="testScroll" -->
             <router-view class='main-view-root'></router-view>
           </div>
         </a-layout-content>

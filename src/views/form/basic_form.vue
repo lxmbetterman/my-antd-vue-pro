@@ -1,110 +1,140 @@
-<!--  -->
 <template>
-  <div>
-    <a-form @submit="handleSubmit" :autoFormCreate="(form) => this.form = form" class="form">
-      <a-row class="form-row">
-      <a-col :lg="6" :md="12" :sm="24">
-        <a-form-item
-          label="仓库名"
-          fieldDecoratorId="repository.name"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入仓库名称', whitespace: true}]}"
-        >
-          <a-input placeholder="请输入仓库名称" />
-        </a-form-item>
-      </a-col>
-      <a-col :xl="{span: 6, offset: 2}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
-        <a-form-item
-          label="仓库域名"
-          fieldDecoratorId="repository.domain"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入仓库域名', whitespace: true}]}"
-        >
-        <!-- {validator: validate} -->
-          <a-input addonBefore="http://" addonAfter=".github.io" placeholder="请输入"/>
-        </a-form-item>
-      </a-col>
-      <a-col :xl="{span: 8, offset: 2}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
-        <a-form-item
-          label="仓库管理员"
-          fieldDecoratorId="repository.manager"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择管理员'}]}"
-        >
-          <a-select placeholder="请选择管理员">
-            <a-select-option value="王同学">王同学</a-select-option>
-            <a-select-option value="李同学">李同学</a-select-option>
-            <a-select-option value="黄同学">黄同学</a-select-option>
-          </a-select>
-        </a-form-item>
-      </a-col>
-    </a-row>
-    <a-row class="form-row">
-      <a-col :lg="6" :md="12" :sm="24">
-        <a-form-item
-          label="审批人"
-          fieldDecoratorId="repository.auditor"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择审批员'}]}"
-        >
-          <a-select placeholder="请选择审批员">
-            <a-select-option value="王晓丽">王晓丽</a-select-option>
-            <a-select-option value="李军">李军</a-select-option>
-          </a-select>
-        </a-form-item>
-      </a-col>
-      <a-col :xl="{span: 6, offset: 2}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
-        <a-form-item
-          label="生效日期"
-          fieldDecoratorId="repository.effectiveDate"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择生效日期'}]}"
-        >
-          <a-range-picker style="width: 100%" />
-        </a-form-item>
-      </a-col>
-      <a-col :xl="{span: 8, offset: 2}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
-        <a-form-item
-          label="仓库类型"
-          fieldDecoratorId="repository.type"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择仓库类型'}]}"
-        >
-          <a-select placeholder="请选择仓库类型">
-            <a-select-option value="公开">公开</a-select-option>
-            <a-select-option value="私密">私密</a-select-option>
-          </a-select>
-        </a-form-item>
-      </a-col>
-    </a-row>
-    <a-form-item >
-      <a-button htmlType="submit" >Submit</a-button>
+  <a-form
+    :form="form"
+    @submit="handleSubmit"
+  >
+    <a-form-item
+      v-for="(k, index) in form.getFieldValue('keys')"
+      :key="k"
+      v-bind="index === 0 ? formItemLayout : formItemLayoutWithOutLabel"
+      :label="index === 0 ? 'slide图片链接' : ''"
+      :required="false"
+    >
+      <a-input
+        v-decorator="[
+          `images[${k}]`,
+          {
+            validateTrigger: ['change', 'blur'],
+            // preserve: true,
+            rules: [{
+              required: true,
+              message: 'Please input passenger\'s name or delete this field.',
+            }],
+          }
+        ]"
+        placeholder="passenger name"
+        style="width: 60%; margin-right: 8px"
+      />
+      <a-icon
+        v-if="form.getFieldValue('keys').length > 1"
+        class="dynamic-delete-button"
+        type="minus-circle-o"
+        :disabled="form.getFieldValue('keys').length === 1"
+        @click="() => remove(k)"
+      />
     </a-form-item>
-    </a-form>
-  </div>
+    <a-form-item v-bind="formItemLayoutWithOutLabel">
+      <a-button
+        type="dashed"
+        style="width: 60%"
+        @click="add"
+      >
+        <a-icon type="plus" /> Add field
+      </a-button>
+    </a-form-item>
+    <a-form-item v-bind="formItemLayoutWithOutLabel">
+      <a-button
+        type="primary"
+        html-type="submit"
+      >
+        Submit
+      </a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
 <script>
+let id = 0
 export default {
   data () {
     return {
+      formItemLayout: {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 4 }
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 20 }
+        }
+      },
+      formItemLayoutWithOutLabel: {
+        wrapperCol: {
+          xs: { span: 24, offset: 0 },
+          sm: { span: 20, offset: 4 }
+        }
+      }
     }
   },
+  beforeCreate () {
+    this.form = this.$form.createForm(this)
+    this.form.getFieldDecorator('keys', { initialValue: [], preserve: true })
+  },
   methods: {
-    handleSubmit (e) {
+    remove  (k) {
+      const { form } = this
+      // can use data-binding to get
+      const keys = form.getFieldValue('keys')
+      // We need at least one passenger
+      if (keys.length === 1) {
+        return
+      }
+
+      // can use data-binding to set
+      form.setFieldsValue({
+        keys: keys.filter(key => key !== k)
+      })
+    },
+
+    add  () {
+      const { form } = this
+      // can use data-binding to get
+      const keys = form.getFieldValue('keys')
+      const nextKeys = keys.concat(++id)
+      // can use data-binding to set
+      // important! notify form to detect changes
+      form.setFieldsValue({
+        keys: nextKeys
+      })
+    },
+
+    handleSubmit  (e) {
       e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values)
+        } else {
+          console.log(err, values, '????')
+        }
+      })
     }
   }
 }
-
 </script>
-<style lang='scss' scoped>
-.form{
-    .form-row{
-      margin: 0 -8px
-    }
-    .ant-col-md-12,
-    .ant-col-sm-24,
-    .ant-col-lg-6,
-    .ant-col-lg-8,
-    .ant-col-lg-10,
-    .ant-col-xl-8,
-    .ant-col-xl-6{
-      padding: 0 8px
-    }
-  }
+<style>
+.dynamic-delete-button {
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  font-size: 24px;
+  color: #999;
+  transition: all .3s;
+}
+.dynamic-delete-button:hover {
+  color: #777;
+}
+.dynamic-delete-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 </style>
