@@ -1,4 +1,8 @@
 const getters = {
+  // 全局常量
+  imgae_tags: state => state.constVar.imgae_tags,
+  imgae_tags_label: state => state.constVar.imgae_tags_label,
+
   //  modules/app.js
   token: state => state.app.app_token,
 

@@ -153,6 +153,27 @@ export const asyncRouterMap = [
     }]
   },
   {
+    path: '/resourceManage',
+    component: Layout,
+    name: 'resourceManage',
+    redirect: '/resourceManage/imageManage',
+    meta: {
+      title: '资源上传管理',
+      icon: 'question',
+      roles: []
+    },
+    children: [{
+      path: '/resourceManage/imageManage',
+      component: () => import('../views/resourceManage/imageManage.vue'),
+      name: 'imageManage',
+      meta: {
+        title: '图片管理',
+        icon: 'question',
+        roles: ['admin']
+      } // 'admin',
+    }]
+  },
+  {
     path: '*',
     redirect: '/404',
     hidden: true
