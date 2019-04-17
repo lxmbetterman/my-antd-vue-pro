@@ -20,9 +20,9 @@
 
     </div>
     <div style='padding:10px 10px;marginTop:20px'>
-      <a-form :form="form" layout="inline">
+      <a-form :form="form" layout="inline" @submit="handleSubmit">
       <a-form-item label="图片类型">
-        <a-select v-decorator="[ 'tag' ]" placeholder="图片所属功能模块"  style="width:150px">
+        <a-select v-decorator="[ 'tag' ]" placeholder="图片所属功能模块"  style="width:150px" allowClear>
           <a-select-option v-for="item in $store.getters.all_category" :key="item.id" :value="item.id">
             {{item.description}}
           </a-select-option>
@@ -32,7 +32,8 @@
         <a-input v-decorator="[ 'titleName' ]" placeholder="图片名称" > </a-input>
       </a-form-item>
       <a-form-item>
-        <a-button @click="getTableList(1)" >
+        <a-button type="primary" html-type="submit" >
+          <!-- getTableList(1) -->
           查询
         </a-button>
 
@@ -58,40 +59,40 @@
 </template>
 <script>
 // import reqwest from 'reqwest'
-const columns = [{
-  dataIndex: 'slug',
-  title: '图片名称',
-  key: 'id',
-  scopedSlots: { customRender: 'name' },
-  align: 'center'
-}, {
-  title: '图片地址',
-  dataIndex: 'source_url',
-  key: 'source_url',
-  align: 'center',
-  scopedSlots: { customRender: 'source_url' }
-}, {
-  title: '图片格式',
-  dataIndex: 'mime_type',
-  key: 'mime_type',
-  align: 'center',
-  width: 100
-}, {
-  title: '图片分类',
-  dataIndex: 'tags',
-  key: 'tags',
-  align: 'center',
-  scopedSlots: { customRender: 'tags' }
-}]
-
-const dataTable = []
+const columns = [
+  {
+    dataIndex: 'slug',
+    title: '图片名称',
+    key: 'id',
+    scopedSlots: { customRender: 'name' },
+    align: 'center'
+  },
+  {
+    title: '图片地址',
+    dataIndex: 'source_url',
+    key: 'source_url',
+    align: 'center',
+    scopedSlots: { customRender: 'source_url' }
+  }, {
+    title: '图片格式',
+    dataIndex: 'mime_type',
+    key: 'mime_type',
+    align: 'center',
+    width: 100
+  }, {
+    title: '图片分类',
+    dataIndex: 'tags',
+    key: 'tags',
+    align: 'center',
+    scopedSlots: { customRender: 'tags' }
+  }]
 
 export default {
   name: 'imageManage',
   data () {
     return {
 
-      dataTable,
+      dataTable: [],
       columns,
       iamgeTagVal: '',
       headers: {
@@ -102,12 +103,25 @@ export default {
       category: '',
       current: 1,
       total: 0,
-      baseUrl: 'http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/'
+      baseUrl: 'http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/',
+      categoryId: '',
+      searchName: ''
     }
   },
   methods: {
     test (value) {
-
+      console.log(1)
+    },
+    handleSubmit  (e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values)
+          this.categoryId = values.tag || ''
+          this.searchName = values.titleName || ''
+          this.getTableList(1)
+        }
+      })
     },
     handleChangeSel (value) {
       console.log(value)
@@ -166,21 +180,23 @@ export default {
     },
     getTableList (current) {
       const hide = this.$message.loading('车型模板数据请求中...', 0)
-      // let url = `http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/wordpress/index.php/wp-json/wp/v2/media?categories=${}&tags=${}`
-      this.axios.get(`wordpress/index.php/wp-json/wp/v2/media?categories=${''}&tags=${''}&page=${current}`)
-        .then(resAll => {
-          // let res = resAll.data
-          console.log(resAll.headers['x-wp-total'], 'resssssssss')
-          this.total = Number(resAll.headers['x-wp-total'])
-          console.log(resAll.data, '____')
-          this.dataTable = resAll.data
-          setTimeout(hide, 0)
-        }).catch(err => {
-          setTimeout(hide, 0)
-          this.$message.success('数据请求错误，请重试')
-          this.total = 0
-          console.log(err)
-        })
+      let url = `wordpress/index.php/wp-json/wp/v2/media?categories=${this.categoryId}&page=${current}`
+      if (this.searchName && this.searchName.trim()) {
+        url += `&search=${this.searchName.trim()}`
+      }
+      this.axios.get(url).then(resAll => {
+        // let res = resAll.data
+        console.log(resAll.headers['x-wp-total'], 'resssssssss')
+        this.total = Number(resAll.headers['x-wp-total'])
+        console.log(resAll.data, '____')
+        this.dataTable = resAll.data
+        setTimeout(hide, 0)
+      }).catch(err => {
+        setTimeout(hide, 0)
+        this.$message.success('数据请求错误，请重试')
+        this.total = 0
+        console.log(err)
+      })
     },
     pageChange (page, pageSize) {
       console.log(page, pageSize)
