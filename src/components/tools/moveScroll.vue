@@ -27,9 +27,6 @@ export default {
       }
     },
     testLeft () {
-      console.log(this.$refs.outer.clientWidth)
-      console.log(this.$refs.inner.clientWidth)
-      console.log(this.$refs)
     }
   },
   mounted () {

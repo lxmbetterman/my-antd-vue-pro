@@ -2,6 +2,8 @@ const getters = {
   // 全局常量
   imgae_tags: state => state.constVar.imgae_tags,
   imgae_tags_label: state => state.constVar.imgae_tags_label,
+  all_category: state => state.constVar.all_category,
+  all_tags: state => state.constVar.all_tags,
 
   //  modules/app.js
   token: state => state.app.app_token,

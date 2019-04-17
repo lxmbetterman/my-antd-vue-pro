@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 Mock.setup({
-  timeout: 1000
+  timeout: 100
 })
 
 // 修复在使用 MockJS 情况下，设置 withCredentials = true，且未被拦截的跨域请求丢失 Cookies 的问题

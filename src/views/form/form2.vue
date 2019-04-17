@@ -4,11 +4,7 @@
     <!-- <iframe src='http://localhost:8082' width="375" height='667'></iframe> -->
     <div class='form'>
       <div class='form-con'>
-        <a-form :form="form"
-
-            @submit="handleSubmit"
-          >
-
+        <a-form :form="form" @submit="handleSubmit" >
             <a-divider class='dividerClass'>请选择你要配置的车款</a-divider>
             <a-form-item label="汽车品牌"  :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-select v-decorator="[ 'carBrand',{
@@ -27,7 +23,7 @@
             <a-form-item label="汽车款式"  :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-select v-decorator="[ 'carStyle',{
                     rules: [{ required: true, message: `请选择汽车款式`,whitespace:true }],
-                  } ]" :disabled="jsonData2.length===0">
+                  } ]" :disabled="jsonData2.length===0" @change='changeCarStyle'>
                  <a-select-option v-for='item in jsonData2' :key='item.name'>{{item.label}}</a-select-option>
               </a-select>
             </a-form-item>
@@ -58,17 +54,17 @@
             </a-form-item>
             <a-form-item label='车型标题' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-input v-decorator="['title',{
-                rules: [{ required: true, message: `请输入slider标题`,whitespace:true }],
+                rules: [{ required: true, message: `请输入车型标题`,whitespace:true }],
                     initialValue: formSlide.title
               }]" />
             </a-form-item>
-            <a-form-item label='官方指导价' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
-              <a-input v-decorator="['price',{
-                rules: [{ required: true, message: `请输入官方指导价`,whitespace:true }],
-                    initialValue: formSlide.price
+            <a-form-item label='车型描述' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+              <a-input v-decorator="['describle',{
+                rules: [{ required: true, message: `请输入车型描述`,whitespace:true }],
+                    initialValue: formSlide.describle
               }]" />
             </a-form-item>
-            <a-form-item label='功能一' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+            <a-form-item label='官方指导价' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-input v-decorator="['price',{
                 rules: [{ required: true, message: `请输入官方指导价`,whitespace:true }],
                     initialValue: formSlide.price
@@ -78,19 +74,19 @@
             <a-form-item label='功能一' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-input v-decorator="['Features[0]',{
                 rules: [{ required: true, message: `功能特点一`,whitespace:true }],
-                    initialValue: formSlide.price
+                    initialValue: formSlide.Features[0]
               }]" />
             </a-form-item>
             <a-form-item label='功能二' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-input v-decorator="['Features[1]',{
                 rules: [{ required: true, message: `功能特点二`,whitespace:true }],
-                    initialValue: formSlide.price
+                    initialValue: formSlide.Features[1]
               }]" />
             </a-form-item>
             <a-form-item label='功能三' :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
               <a-input v-decorator="['Features[2]',{
                 rules: [{ required: true, message: `功能特点三`,whitespace:true }],
-                    initialValue: formSlide.price
+                    initialValue: formSlide.Features[2]
               }]" />
             </a-form-item>
 
@@ -175,8 +171,14 @@
 import jsonData from '../../mock/json/get.js'
 console.log(jsonData)
 export default {
+  name: 'basic_form2',
   data () {
     return {
+      page_category_id: '',
+      page_tags_id: '', // 车牌 车型 车款 id的逗号连接 str
+      page_tags_id_style: '', // 车款对应的tag id
+      templateId: '', // 模板id
+      page_tas: '',
       jsonData,
       jsonData1: [],
       jsonData2: [],
@@ -188,6 +190,7 @@ export default {
       formSlide: {
         images: [''],
         title: '',
+        describle: '',
         price: '',
         Features: ['', '', ''],
         coreLight: [
@@ -239,7 +242,68 @@ export default {
             ]
           }
         ]
-      }
+      },
+      backformSlide: {
+        images: [''],
+        title: '',
+        describle: '',
+        price: '',
+        Features: ['', '', ''],
+        coreLight: [
+          {
+            title: '',
+            child_gird: [
+              // {
+              //   title: '亮点一 全尺寸7座出行空间',
+              //   child: [
+              //     { title1: '乘坐空间', html: 'a', active: false },
+              //     { title1: '储物空间', html: 'bbbb', active: false },
+              //     { title1: '全景大天窗', html: 'ccc', active: false }
+              //   ]
+              // },
+              // {
+              //   title: '亮点一 全尺寸7座出行空间2',
+              //   child: [
+              //     { title1: '乘坐空间', html: 'a', active: false },
+              //     { title1: '储物空间', html: 'bbbb', active: false },
+              //     { title1: '全景大天窗', html: 'ccc', active: false }
+              //   ]
+              // }
+            ],
+            active: false
+          },
+          {
+            title: '',
+            child_gird: [
+              // {
+              //   title: '亮点二 全尺寸7座出行空间',
+              //   child: [
+              //     { title1: '乘坐空间', html: 'a', active: false },
+              //     { title1: '储物空间', html: 'bbbb', active: false },
+              //     { title1: '全景大天窗', html: 'ccc', active: false }
+              //   ]
+              // }
+            ],
+            active: false
+          },
+          {
+            title: '',
+            child_gird: [
+              // {
+              //   title: '亮点三 全尺寸7座出行空间',
+              //   child: [
+              //     { title1: '乘坐空间', html: 'a', active: false },
+              //     { title1: '储物空间', html: 'bbbb', active: false },
+              //     { title1: '全景大天窗', html: 'ccc', active: false }
+              //   ]
+              // }
+            ],
+            active: false
+          }
+        ]
+      },
+      tempalteLoading: null,
+      saveLoading: null
     }
   },
   computed: {
@@ -248,13 +312,84 @@ export default {
     }
   },
   mounted () {
-
+    this.getCategoryId()
   },
   beforeCreate () {
     this.form = this.$form.createForm(this)
   },
   methods: {
+    getTemplateData () { // 请求模板数据
+      const hide = this.$message.loading('车型模板数据请求中...', 0)
+      // let url = `http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/wordpress/index.php/wp-json/wp/v2/media?categories=${}&tags=${}`
+      this.axios.get(`wordpress/index.php/wp-json/wp/v2/media?categories=${this.page_category_id}&tags=${this.page_tags_id_style}`)
+        .then(resAll => {
+          let res = resAll.data
+          if (res.length === 0) {
+            this.$message.success('该车款暂无配置信息，请配置')
+            setTimeout(hide, 0)
+            this.formSlide = this.backformSlide
+            this.templateId = ''
+            return
+          }
+          let lastRes = res[res.length - 1] // source_url
+          // console.log(res, 'VVV')
+          this.templateId = lastRes.id
+
+          this.axios.get(lastRes.source_url).then((resAll) => {
+            let resTxt = resAll.data
+            this.formSlide = JSON.parse(resTxt.file)
+            setTimeout(hide, 0)
+          })
+        }).catch(err => {
+          setTimeout(hide, 2500)
+          this.$message.success('数据请求错误，请重试')
+          this.formSlide = this.backformSlide
+          console.log(err)
+        })
+    },
+    getTagsIds (carbrand, carType, carStyle) {
+      // this.tempalteLoading = this.$message.loading('Action in progress..', 0)
+      this.$store.dispatch('getTag').then((res) => {
+        console.log(res, carbrand, carType, carStyle)
+        let arrId = []
+        res.forEach(item => {
+          console.log(item)
+          if (item.name === carbrand) {
+            arrId.push(item.id)
+            console.log(item.id, '_________carbrand')
+          }
+          if (item.name === carType) {
+            arrId.push(item.id)
+            console.log(item.id, '_________carType')
+          }
+          if (item.name === carStyle) {
+            arrId.push(item.id)
+            this.page_tags_id_style = item.id
+            console.log(item.id, '_________carStyle')
+          }
+          this.page_tags_id = arrId.join(',')
+        })
+      }).then((res) => {
+        console.log('开始请求模板数据')
+        if (this.page_category_id && this.page_tags_id_style) {
+          this.getTemplateData()
+        } else {
+          this.$message.error('车型车款参数选择错误，请重试')
+        }
+      })
+    },
+    getCategoryId () { // 获取 page_category_id的值
+      this.$store.dispatch('getCategory').then((res) => {
+        res.some(item => {
+          if (item.slug === 'derivative') {
+            this.page_category_id = item.id
+          }
+          return item.slug === 'derivative'
+        })
+      })
+    },
     changeCarBrand (carbrand, vnode) {
+      this.carBrand = carbrand
       this.form.setFieldsValue({ carType: '' })
       this.form.setFieldsValue({ carStyle: '' })
       if (carbrand) {
@@ -267,12 +402,26 @@ export default {
       this.jsonData2 = []
     },
     changeCarType (carType, vnode) {
+      this.carType = carType
       this.form.setFieldsValue({ carStyle: '' })
       if (carType) {
         this.jsonData2 = jsonData[this.indexCarBrand].nameplate[vnode.key].derivates
       } else {
         this.jsonData2 = []
       }
+    },
+    changeCarStyle (carStyle) {
+      this.carStyle = carStyle
+      if (carStyle) {
+        console.log(this.carBrand, '|', this.carType, '|', this.carStyle)
+
+        this.page_tags_id_style = ''
+        this.page_tags_id = ''
+        this.getTagsIds(this.carBrand, this.carType, this.carStyle)
+      }
+    },
+    getTasByCarStyle () {
+      console.log()
     },
     delGraphic (index, index2, index3) {
       let newValue = JSON.parse(JSON.stringify(this.formSlide.coreLight.concat()))
@@ -285,6 +434,9 @@ export default {
        *indexGraphic 第几个图文grid
        */
       let newValue = JSON.parse(JSON.stringify(this.formSlide.coreLight.concat()))
+      if (newValue[indexCore].child_gird[indexGrid].child === undefined) {
+        newValue[indexCore].child_gird[indexGrid].child = []
+      }
       newValue[indexCore].child_gird[indexGrid].child.push({ title1: '图文标题', html: '图文内容', active: false })
       this.$set(this.formSlide, 'coreLight', newValue)
     },
@@ -296,8 +448,11 @@ export default {
     addCore (index) {
       // console.log(this.formSlide.coreLight)
       let newValue = JSON.parse(JSON.stringify(this.formSlide.coreLight.concat()))
+      if (newValue[index].child_gird === undefined) {
+        newValue[index].child_gird = []
+      }
       // console.log(newValue)
-      newValue[index].child_gird.push({ title: '', child: [] })
+      newValue[index].child_gird.push({ title: '', child: [], active: false })
       // this.coreLight = newValue
       this.$set(this.formSlide, 'coreLight', newValue)
     },
@@ -340,28 +495,103 @@ export default {
         if (!err) {
           console.log(values, '？')
           let Pdata = JSON.stringify(values)
-          console.log(Pdata, '???')
-          this.putData(Pdata)
+          this.putfile(Pdata)
         }
       })
     },
-    putData (Pdata) {
-      this.axios.post('http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/wordpress/index.php/wp-json/wp/v2/media',
-        {
-          'title': 'Jaguar_JAFT',
-          'categories': '',
-          'tags': '',
-          'file': Pdata
-        },
-        { headers: { 'X-Requested-With': 'XMLHttpRequest' }
-        }
-      ).then(res => {
-        console.log('res', 'succcccc')
-      }).catch(err => {
-        console.log(err)
-      })
-    }
+    putTag () {
 
+    },
+    // putData (Pdata) { // 先上传文件数据，再修改tag数据
+    //   // let jsonFileName = this.carBrand + '_' + this.carType + '_' + this.carStyle + 'cardetail'
+    //   let formData = new FormData()
+    //   // formData.append('categories', '3')
+    //   // formData.append('tags', '17,13')
+    //   formData.append('file', Pdata)
+
+    //   // let options = {
+    //   //   method: 'post',
+    //   //   url: '/api/index.php/wp-json/wp/v2/media',
+    //   //   // mode:'cors',
+    //   //   headers: {
+    //   //     'Content-Disposition': 'attachment;filename=aaaa.txt',
+    //   //     'Content-Type': 'multipart/form-data'
+    //   //   },
+    //   //   // timeout: 3600,
+    //   //   // `withCredentials` indicates whether or not cross-site Access-Control requests
+    //   //   // should be made using credentials
+    //   //   withCredentials: true, // default: false
+
+    //   //   // `data` is the data to be sent as the request body
+    //   //   // Only applicable for request methods 'PUT', 'POST', and 'PATCH'
+    //   //   data: formData
+    //   // }
+    //   console.log(formData, '???')
+    //   this.axios.post('/api/wordpress/index.php/wp-json/wp/v2/media', {
+    //   },
+    //   {
+    //     headers: {
+    //       'Content-Disposition': `attachment;filename=${'ddd'}.txt`,
+    //       'Content-Type': 'multipart/form-data'
+    //     },
+    //     data: formData
+    //   }
+    //   ).then(res => {
+    //     console.log('res', 'succcccc')
+    //   }).catch(err => {
+    //     console.log(err)
+    //   })
+    // },
+    putfile (Pdata) { // 上传模板数据
+      let jsonTemplateName = this.carBrand + '_' + this.carType + '_' + this.carStyle + 'cardetail_' + (new Date()).getTime()
+      this.saveLoading = this.$message.loading('数据保存中...', 0)
+      if (this.templateId) {
+        this.axios.delete(`http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/wordpress/index.php/wp-json/wp/v2/media/${this.templateId}?force=true`).then(() => {
+          this.axios.post('/wordpress/index.php/wp-json/wp/v2/media/', { 'file': Pdata },
+            {
+              headers: { 'Content-Disposition': `attachment;filename=${jsonTemplateName}.txt` }
+            })
+            .then(resAll => {
+              let res = resAll.data
+              console.log('json文件数据保存成功，开始给文件加tag')
+              this.templateId = res.id
+              this.setFileTag(res.id)
+            }).catch(err => {
+              setTimeout(this.saveLoading, 0)
+              this.$message.error('数据保存失败') // 这里已经把文件删了
+              console.log(err)
+            })
+        })
+      } else {
+        this.axios.post('/wordpress/index.php/wp-json/wp/v2/media/', { 'file': Pdata },
+          {
+            headers: { 'Content-Disposition': `attachment;filename=${jsonTemplateName}.txt` }
+          })
+          .then(res => {
+            console.log('json文件数据保存成功，开始给文件加tag')
+            this.templateId = res.id
+            this.setFileTag(res.id)
+          }).catch(err => {
+            setTimeout(this.saveLoading, 0)
+            this.$message.error('数据保存失败')
+            console.log(err)
+          })
+      }
+    },
+    setFileTag (id) { // 设置模板的category和tags
+      // let jsonTemplateName = this.carBrand + '_' + this.carType + '_' + this.carStyle + 'cardetail_' + (new Date()).getTime()
+      // categories: '3', tags: '17,13' 应该动态获取值axios
+      this.axios.post('/wordpress/index.php/wp-json/wp/v2/media/' + id, { categories: this.page_category_id, tags: this.page_tags_id })
+        .then(resAll => {
+          console.log('tag设置完成')
+          setTimeout(this.saveLoading, 0)
+          this.$message.success('数据保存成功')
+        }).catch(err => {
+          console.log(err)
+          setTimeout(this.saveLoading, 0)
+          this.$message.error('数据保存失败')
+        })
+    }
   }
 }
 

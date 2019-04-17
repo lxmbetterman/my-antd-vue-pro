@@ -12,7 +12,7 @@ module.exports = {
       chunks: ['chunk-vendors', 'chunk-common', 'index']
     }
   },
-  publicPath: process.env.NODE_ENV === 'production' ? '/production-sub-path/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   lintOnSave: process.env.NODE_ENV !== 'production',
   productionSourceMap: false, // js map文件
   chainWebpack: (config) => {
@@ -38,9 +38,12 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: '<url>',
+        target: 'http://rdss-dev-1232799807.cn-north-1.elb.amazonaws.com.cn:9001/',
         ws: true,
-        changeOrigin: true
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
       }
     }
   }

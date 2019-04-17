@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <span>
-      This is an home page {{$store.getters.roles}}
+      This is home page
       </span>
       <br>
-    <a-button type="primary" @click="$router.push('/test1')">test1-1</a-button>
+    <!-- <a-button type="primary" @click="$router.push('/test1')">test1-1</a-button>
     <a-button  @click="$router.push('/test2')">Default</a-button>
     <a-button type="dashed">Dashed</a-button>
-    <a-button type="danger">Danger</a-button>
+    <a-button type="danger">Danger</a-button> -->
   </div>
 </template>
 

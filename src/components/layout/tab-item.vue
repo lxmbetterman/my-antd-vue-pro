@@ -63,7 +63,6 @@ export default {
       this.closeSelectedTag(selectRoute)
     },
     changePage (key) {
-      console.log(key)
       this.$router.push(key)
     },
     isActive (route) {

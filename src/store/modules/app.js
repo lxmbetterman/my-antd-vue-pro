@@ -23,10 +23,12 @@ const app = {
     },
     app_login ({ dispatch, commit }) { // 应用登录
       return new Promise((resolve, reject) => {
-        vue.axios.post('/login/token').then((res) => { // 获取token并保存跳转到首页
-          dispatch('save_app_token', res) // dispatch是异步执行的
-          resolve()
-        })
+        // vue.axios.post('/login/token').then((res) => { // 获取token并保存跳转到首页
+        //   dispatch('save_app_token', res) // dispatch是异步执行的
+        //   resolve()
+        // })
+        dispatch('save_app_token', '9527') // dispatch是异步执行的
+        resolve()
       })
     },
     app_logout ({ dispatch }) { // 应用退出登录

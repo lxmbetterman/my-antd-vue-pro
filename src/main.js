@@ -12,7 +12,7 @@ import './antd-import.js'
 import './permission'
 import Storage from 'vue-ls'
 import { VueAxios } from './axios/request' // 整体使用就行
-import './mock' // 引入mockjs
+// import './mock' // 引入mockjs
 import './common.css'
 import 'normalize.css'
 

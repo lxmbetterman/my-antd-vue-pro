@@ -15,7 +15,10 @@
           <tab-item></tab-item>
           <div class='main-view' >
             <!-- @scroll="testScroll" -->
-            <router-view class='main-view-root'></router-view>
+            <!-- <router-view class='main-view-root'></router-view> -->
+            <keep-alive :include="cachedViews">
+              <router-view class='main-view-root' :key="key"/>
+            </keep-alive>
           </div>
         </a-layout-content>
         <a-layout-footer>
@@ -40,18 +43,25 @@ export default {
       // isScrollY: false // 判断是否有y滚动条，如果有就要留灰色滚动条边距#f1f1f1
     }
   },
+  computed: {
+    cachedViews () {
+      return this.$store.state.tagsView.cachedViews
+    },
+    key () {
+      return this.$route.fullPath
+    }
+  },
   methods: {
     onSettingDrawerChange (val) {
       this.showSetting = val
     },
     callback (key) {
-      console.log(key)
     },
     test () {
       console.log(this.$refs)
     },
     testScroll (e) {
-      console.log(e)
+
     }
 
   },

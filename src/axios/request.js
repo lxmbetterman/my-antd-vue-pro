@@ -6,7 +6,7 @@ import notification from 'ant-design-vue/es/notification'
 
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: '', // api base_url
+  baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/', // api base_url
   timeout: 5000 // 请求超时时间
 })
 
@@ -34,7 +34,7 @@ service.interceptors.request.use(config => {
 
 // response 拦截器
 service.interceptors.response.use((response) => {
-  return response.data
+  return response
 }, err)
 
 const installer = {

@@ -17,11 +17,15 @@ const app = {
     },
     get_user_info ({ dispatch, commit }, token) {
       return new Promise((resolve, reject) => {
-        axios.get('/login/userInfo', {
-          params: { token }
-        }).then((res) => {
-          commit('SAVE_ROLES', res.roles)
-          resolve(res)
+        // axios.get('/login/userInfo', {
+        //   params: { token }
+        // }).then((res) => {
+        //   commit('SAVE_ROLES', res.roles)
+        //   resolve(res)
+        // })
+        commit('SAVE_ROLES', 'admin')
+        resolve({
+          roles: 'admin'
         })
       })
     },

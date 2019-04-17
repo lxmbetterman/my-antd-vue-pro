@@ -2,7 +2,7 @@
   <a-dropdown style="display: inline-block; height: 100%; vertical-align: initial" >
     <span style="cursor: pointer">
       <a-avatar class="avatar" size="small" shape="circle" src="https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png"/>
-      <span>帅的流油的赖帅</span>
+      <span>admin</span>
     </span>
     <a-menu style="width: 150px" slot="overlay" @click='handleClick'>
       <a-menu-item key="toggleMenu">
@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     handleClick ({ key }) {
-      console.log(key)
       if (key === 'loginOut') {
         this.$store.dispatch('app_logout').then(() => {
           this.$router.push('/login')

@@ -25,7 +25,6 @@ export default {
       let timer = setInterval(function () {
         var scrollTop = PEle.scrollTop
         var ispeed = Math.floor(-scrollTop / 6)
-        console.log(ispeed)
         if (scrollTop === 0) {
           clearInterval(timer)
         }
