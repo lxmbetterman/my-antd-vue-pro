@@ -68,7 +68,7 @@ export default {
   methods: {
     login () {
       this.loading = true
-      this.$store.dispatch('app_login').then(() => {
+      this.$store.dispatch('app/app_login').then(() => {
         this.$router.push(this.redirect || '/index')
         this.loading = true
       })

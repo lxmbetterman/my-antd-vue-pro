@@ -1,5 +1,6 @@
 // 布局相关的控制变量
 const layout = {
+  namespaced: true,
   state: {
     collapsed: false, // false 展开； true 折叠的
     menuPosition: 'side' // 菜单位置

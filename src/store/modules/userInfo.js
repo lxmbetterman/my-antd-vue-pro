@@ -1,5 +1,6 @@
-import { axios } from '../../axios/request'
+// import { axios } from '../../axios/request'
 const app = {
+  namespaced: true,
   state: {
     roles: [] // 用于保存用户当前的角色（没有roles数据，路由跳转时，会根据保存的token请求用户数据）
   },
@@ -30,6 +31,7 @@ const app = {
       })
     },
     clear_user_info ({ commit }) {
+      console.log('清空用户信息')
       commit('CLEAR_USER_INFO')
     }
   }

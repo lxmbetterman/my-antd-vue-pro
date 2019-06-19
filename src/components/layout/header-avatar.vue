@@ -30,16 +30,18 @@ export default {
   methods: {
     handleClick ({ key }) {
       if (key === 'loginOut') {
-        this.$store.dispatch('app_logout').then(() => {
+        this.$store.dispatch('app/app_logout').then(async () => {
+          await this.$store.dispatch('userInfo/clear_user_info') // 清除用户信息数据
+          await this.$store.dispatch('permission/clear_routes') // 清除路由数据
           this.$router.push('/login')
         })
       } else if (key === 'toggleMenu') {
-        this.$store.dispatch('toggle_collapsed')
+        this.$store.dispatch('layout/toggle_collapsed')
       } else if (key === 'layout') {
         if (this.$store.getters.menuPosition === 'side') {
-          this.$store.commit('CHANGE_MENU_POSITION', 'header')
+          this.$store.commit('layout/CHANGE_MENU_POSITION', 'header')
         } else {
-          this.$store.commit('CHANGE_MENU_POSITION', 'side')
+          this.$store.commit('layout/CHANGE_MENU_POSITION', 'side')
         }
       }
     }

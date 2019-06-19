@@ -34,25 +34,12 @@ export default {
     return {}
   },
   methods: {
-    loginOut () {
-      this.$store.dispatch('app_logout').then(() => {
-        this.$router.push('/login')
-        // location.reload()
-      })
-    },
     toggleMenu () {
-      this.$store.dispatch('toggle_collapsed')
+      this.$store.dispatch('layout/toggle_collapsed')
     },
     onSelect () {
-
-    },
-    test () {
-      if (this.$store.getters.menuPosition === 'side') {
-        this.$store.commit('CHANGE_MENU_POSITION', 'header')
-      } else {
-        this.$store.commit('CHANGE_MENU_POSITION', 'side')
-      }
     }
+
   }
 }
 

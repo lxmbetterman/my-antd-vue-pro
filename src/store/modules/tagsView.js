@@ -1,5 +1,6 @@
 //  管理打开标签以及缓存页面
 const tagsView = {
+  namespaced: true,
   state: {
     visitedViews: [],
     cachedViews: []

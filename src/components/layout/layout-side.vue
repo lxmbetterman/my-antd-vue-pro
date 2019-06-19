@@ -2,7 +2,7 @@
 <template>
     <!--v-model="collapsed" 表示 sider布局的展开状态 -->
     <a-layout-sider width='256px' collapsible v-model="collapsed" @collapse='handle_collapse'>
-      <div class="logo" @click="$store.dispatch('toggle_collapsed')">
+      <div class="logo" @click="$store.dispatch('layout/toggle_collapsed')">
             <img src="../../assets/logo.png" alt="">
             <h1 :class={showProName:collapsed}>antd-vue-pro</h1>
       </div>
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     handle_collapse (collapsed, type) {
-      this.$store.dispatch('toggle_collapsed')
+      this.$store.dispatch('layout/toggle_collapsed')
     }
   }
 }

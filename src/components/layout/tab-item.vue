@@ -71,7 +71,7 @@ export default {
     addViewTags () {
       const { name } = this.$route
       if (name) {
-        this.$store.dispatch('addView', this.$route)
+        this.$store.dispatch('tagsView/addView', this.$route)
       }
       return false
     },
@@ -103,7 +103,7 @@ export default {
       })
     },
     closeSelectedTag (view) {
-      this.$store.dispatch('delView', view).then(({ visitedViews }) => {
+      this.$store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
           const latestView = visitedViews.slice(-1)[0]
           if (latestView) {

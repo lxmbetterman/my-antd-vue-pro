@@ -44,6 +44,7 @@ function filterAsyncRouter (routes, roles) {
 
 // 权限路由store
 const permission = {
+  namespaced: true,
   state: {
     routers: constantRouterMap, // 动态路由权限过滤后全部的路由数据
     addRouters: [] // 动态路由权限过滤后新增的路由数据
@@ -68,10 +69,11 @@ const permission = {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
         }
         commit('SET_ROUTERS', accessedRouters)
-        resolve()
+        resolve(accessedRouters)
       })
     },
     clear_routes ({ commit }) {
+      console.log('重置路由数据')
       commit('CLEAR_ROUTES')
     }
   }

@@ -42,7 +42,7 @@ new Vue({
   store,
   render: h => h(App),
   mounted () {
-    store.commit('SAVE_APP_TOKEN', Vue.ls.get('token')) // 每次刷新把localStorage的token保存一份到store
+    store.commit('app/SAVE_APP_TOKEN', Vue.ls.get('token')) // 每次刷新把localStorage的token保存一份到store
   }
 }).$mount('#app')
 Vue.ls.get('token')
