@@ -21,7 +21,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/index/home', // 当路由为 '' 会重定向到 home
     meta: {
-      title: 'home + about',
+      title: '首页',
       icon: 'gift'
     },
     children: [{
@@ -29,7 +29,7 @@ export const constantRouterMap = [
       component: Home,
       name: 'home',
       meta: {
-        title: 'home',
+        title: '首页面板',
         icon: 'setting'
       }
     }
@@ -45,45 +45,22 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
-    path: '/form',
+    path: '/test1',
     component: Layout,
-    name: 'form',
-    redirect: '/form/basic_form2',
+    name: 'test1',
+    redirect: '/test1/test1-1',
     meta: {
-      title: '页面模板配置管理',
-      icon: 'question',
-      roles: []
-    },
-    children: [ {
-      path: '/form/basic_form2',
-      component: () => import('../views/form/form2.vue'),
-      name: 'basic_form2',
-      meta: {
-        title: '车型详情',
-        icon: 'question',
-        roles: ['admin']
-      } // 'admin',
-    }]
-  },
-  {
-    path: '/resourceManage',
-    component: Layout,
-    name: 'resourceManage',
-    redirect: '/resourceManage/imageManage',
-    meta: {
-      title: '资源上传管理',
-      icon: 'question',
-      roles: []
+      title: 'test测试页面1',
+      icon: 'question'
     },
     children: [{
-      path: '/resourceManage/imageManage',
-      component: () => import('../views/resourceManage/imageManage.vue'),
-      name: 'imageManage',
+      path: '/test1/test1-1',
+      component: () => import('../views/test_1/test_1_1.vue'),
+      name: 'test_1_1',
       meta: {
-        title: '图片管理',
-        icon: 'question',
-        roles: ['admin']
-      } // 'admin',
+        title: '回到顶部',
+        icon: 'question'
+      }
     }]
   },
   {
