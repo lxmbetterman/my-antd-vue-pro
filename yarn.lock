@@ -1449,9 +1449,9 @@ async-each@^1.0.1:
   integrity sha1-i4p8oqZY+Sfp8wfW0aQvQZnw9zU=
 
 async-limiter@~1.0.0:
-  version "1.0.0"
-  resolved "http://registry.npm.taobao.org/async-limiter/download/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
-  integrity sha1-ePrtjD0HSrgfIrTphdeehzj3IPg=
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
+  integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
 async-validator@^1.8.2:
   version "1.11.0"
@@ -5767,6 +5767,11 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+opencollective-postinstall@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
+
 opener@^1.5.1:
   version "1.5.1"
   resolved "http://registry.npm.taobao.org/opener/download/opener-1.5.1.tgz#6d2f0e77f1a0af0032aca716c2c1fbb8e7e8abed"
@@ -8149,6 +8154,13 @@ vue-loader@^15.6.4:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-ls@^3.2.1:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/vue-ls/-/vue-ls-3.2.2.tgz#c0178a027913e20e238bac8b9fa2ade2d69cce66"
+  integrity sha512-xros9Zheckv+8x9PerHvWe5SMYud0+ZlPAMrKWKNtDN/usMOKRoluj6kBZyQo6BxwpmiBL8/EjKMYjxmCNXOMg==
+  dependencies:
+    opencollective-postinstall "^2.0.2"
+
 vue-ref@^1.0.4:
   version "1.0.6"
   resolved "http://registry.npm.taobao.org/vue-ref/download/vue-ref-1.0.6.tgz#b9b3d7d0e290ee2fd3d50d5d7bdac520806cb265"
@@ -8418,9 +8430,9 @@ write@^0.2.1:
     mkdirp "^0.5.1"
 
 ws@^6.0.0:
-  version "6.2.0"
-  resolved "http://registry.npm.taobao.org/ws/download/ws-6.2.0.tgz#13806d9913b2a5f3cbb9ba47b563c002cbc7c526"
-  integrity sha1-E4BtmROypfPLubpHtWPAAsvHxSY=
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
+  integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
 
